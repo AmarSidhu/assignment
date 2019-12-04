@@ -1,0 +1,29 @@
+# https://github.com/AmarSidhu/assignment
+language: node_js
+node_js:
+  - 10.9.0
+
+cache: npm
+
+env:
+  - NOW_TOKEN=d3xKalEQ5lrHARtXBtmRMkLk
+
+install:
+  - npm install
+
+before_script:
+  - mkdir public
+  - cd public
+
+script:
+  - npm run build
+  - npm run test
+  
+before_install:
+  - "npm config set spin false"
+  - npm i -g now
+
+deploy:
+  provider: script
+  script: bash scripts/deploy.sh
+  skip_cleanup: true
